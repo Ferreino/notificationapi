@@ -4,15 +4,10 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Obtén la URL del frontend desde las variables de entorno
-  const frontendUrl = process.env.FRONTEND_URL;
-
-  // Habilita CORS permitiendo solo el origen especificado
   app.enableCors({
-    origin: frontendUrl,
-    credentials: true, // si usas cookies o auth headers
+, origin: process.env.CORS_ORIGIN || '*', // Cambia esto al origen de tu frontend
   });
 
-  await app.listen(3000);
-}
+const port = process.env.PORT || 3000;
+  await app.listen(port);}
 bootstrap();
